@@ -29,9 +29,15 @@ namespace E_Commerce.Controllers
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<IEnumerable<Product>>> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            //var category = await _context.Categories.FindAsync(id);
+            string query = "SELECT * FROM products WHERE c_id = {0}";
+            var category = await _context.Products
+                .FromSqlRaw(query, id).ToListAsync();
+            //.Include(d => d.Category.c_Id)
+            //.AsNoTracking()
+            //.FirstOrDefaultAsync();
 
             if (category == null)
             {
