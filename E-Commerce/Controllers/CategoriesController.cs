@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Commerce.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -22,10 +22,32 @@ namespace E_Commerce.Controllers
         }
 
         // GET: api/Categories
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        [HttpGet("{bangla}")]
+        public dynamic GetCategories(int bangla)
         {
-            return await _context.Categories.ToListAsync();
+            //return await _context.Categories.ToListAsync();
+            if (bangla == 1)
+            {
+                IEnumerable<CategoryBan> data = _context.Categories.Select(p => new CategoryBan
+                {
+                    c_id = p.c_id,
+                    c_title = p.c_title,
+                    c_imgLink = p.c_imgLink
+                });
+
+                return data.ToList();
+            }
+            else
+            {
+                IEnumerable<CategoryEng> data = _context.Categories.Select(p => new CategoryEng
+                {
+                    c_id = p.c_id,
+                    c_title_eng = p.c_title_eng,
+                    c_imgLink = p.c_imgLink
+                });
+                 
+                return data.ToList();
+            }
         }
 
         // GET: api/Categories/5
@@ -43,22 +65,30 @@ namespace E_Commerce.Controllers
             }*/
             if (bangla==1)
             {
-                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
+                IEnumerable<ProductBan> data = _context.Products.Select(p => new ProductBan
                 {
                     c_Id = id,
                     p_id = p.p_id,
-                    amount = p.amount
+                    p_title = p.p_title,
+                    price = p.price,
+                    p_imgLink = p.p_imgLink,
+                    amount = p.amount,
+                    specification = p.specification
                 });
 
                 return data.ToList();
             }
             else
             {
-                IEnumerable<Product> data = _context.Products.Select(p => new Product
+                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
                 {
                     c_Id = id,
                     p_id = p.p_id,
-                    p_title = p.p_title
+                    amount_eng = p.amount_eng,
+                    p_title_eng = p.p_title_eng,
+                    price_eng = p.price_eng,
+                    p_imgLink = p.p_imgLink,
+                    specification_eng = p.specification_eng
                 });
 
                 return data.ToList();

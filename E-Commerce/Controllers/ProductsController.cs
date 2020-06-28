@@ -9,7 +9,7 @@ using E_Commerce.Models;
 
 namespace E_Commerce.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -21,24 +21,82 @@ namespace E_Commerce.Controllers
         }
 
         // GET: api/Products
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        [HttpGet("{bangla}")]
+        public dynamic GetProducts(int bangla)
         {
-            return await _context.Products.ToListAsync();
+            //return await _context.Products.ToListAsync();
+            if (bangla == 1)
+            {
+                IEnumerable<ProductBan> data = _context.Products.Select(p => new ProductBan
+                {
+                    p_id = p.p_id,
+                    c_Id = p.c_Id,
+                    p_title = p.p_title,
+                    amount = p.amount,
+                    price = p.price,
+                    p_imgLink = p.p_imgLink,
+                    specification = p.specification
+                });
+
+                return data.ToList();
+            }
+            else
+            {
+                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
+                {
+                    p_id = p.p_id,
+                    c_Id = p.c_Id,
+                    p_title_eng = p.p_title_eng,
+                    amount_eng = p.amount_eng,
+                    price_eng = p.price_eng,
+                    p_imgLink = p.p_imgLink,
+                    specification_eng = p.specification_eng
+                });
+
+                return data.ToList();
+            }
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        [HttpGet("{id}/{bangla}")]
+        public dynamic GetProduct(int id,int bangla)
         {
-            var product = await _context.Products.FindAsync(id);
+            //var product = await _context.Products.FindAsync(id);
 
-            if (product == null)
+            /*if (product == null)
             {
                 return NotFound();
-            }
+            }*/
+            if (bangla == 1)
+            {
+                IEnumerable<ProductBan> data = _context.Products.Select(p => new ProductBan
+                {
+                    p_id = id,
+                    c_Id = p.c_Id,
+                    p_title = p.p_title,
+                    amount = p.amount,
+                    price = p.price,
+                    p_imgLink = p.p_imgLink,
+                    specification = p.specification
+                });
 
-            return product;
+                return data.ToList();
+            }
+            else
+            {
+                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
+                {
+                    p_id = id,
+                    c_Id = p.c_Id,
+                    p_title_eng = p.p_title_eng,
+                    amount_eng = p.amount_eng,
+                    price_eng = p.price_eng,
+                    p_imgLink = p.p_imgLink,
+                    specification_eng = p.specification_eng
+                });
+
+                return data.ToList();
+            }
         }
 
         // PUT: api/Products/5

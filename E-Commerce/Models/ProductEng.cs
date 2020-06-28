@@ -12,12 +12,10 @@ namespace E_Commerce.Models
         [Key]
         public int p_id { get; set; }
         public int c_Id { get; set; }
-        public string p_title { get; set; }
-        public string amount { get; set; }
-
-        public static implicit operator ActionResult<object>(ProductEng v)
-        {
-            throw new NotImplementedException();
-        }
+        public string p_title_eng { get; set; }
+        public string amount_eng { get; set; }
+        public string price_eng { get; set; }
+        public string p_imgLink { get; set; }
+        public string specification_eng { get; set; }
     }
 }

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Models
 {
-    public class Category
+    public class CategoryEng
     {
         [Key]
         public int c_id { get; set; }
-        public string c_title { get; set; }
-        public string c_imgLink { get; set; }
         public string c_title_eng { get; set; }
+        public string c_imgLink { get; set; }
     }
 }
