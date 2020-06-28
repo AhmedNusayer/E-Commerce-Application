@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using E_Commerce.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_Commerce.Controllers
 {
@@ -28,23 +29,40 @@ namespace E_Commerce.Controllers
         }
 
         // GET: api/Categories/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetCategory(int id)
+        [HttpGet("{id}/{bangla}")]
+        public dynamic GetCategory(int id, int bangla)
         {
             //var category = await _context.Categories.FindAsync(id);
-            string query = "SELECT * FROM products WHERE c_id = {0}";
-            var category = await _context.Products
-                .FromSqlRaw(query, id).ToListAsync();
-            //.Include(d => d.Category.c_Id)
-            //.AsNoTracking()
-            //.FirstOrDefaultAsync();
+            //string query = "SELECT amount FROM products WHERE c_id = {0}";
+            /*var product = await _context.Products
+                .FromSqlRaw(query, id).AsNoTracking().ToListAsync();
 
-            if (category == null)
+            if (product == null)
             {
                 return NotFound();
-            }
+            }*/
+            if (bangla==1)
+            {
+                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
+                {
+                    c_Id = id,
+                    p_id = p.p_id,
+                    amount = p.amount
+                });
 
-            return category;
+                return data.ToList();
+            }
+            else
+            {
+                IEnumerable<Product> data = _context.Products.Select(p => new Product
+                {
+                    c_Id = id,
+                    p_id = p.p_id,
+                    p_title = p.p_title
+                });
+
+                return data.ToList();
+            }
         }
 
         // PUT: api/Categories/5
@@ -112,4 +130,5 @@ namespace E_Commerce.Controllers
             return _context.Categories.Any(e => e.c_id == id);
         }
     }
+
 }

@@ -33,7 +33,7 @@ namespace E_Commerce
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://example.com");
+                                      builder.WithOrigins("http://localhost:3000");
                                   });
             });
             services.AddDbContext<ECommerceContext>(options =>
