@@ -69,10 +69,11 @@ namespace E_Commerce.Controllers
             }*/
             if (bangla == 1)
             {
-                IEnumerable<ProductBan> data = _context.Products.Select(p => new ProductBan
+                IEnumerable<ProductBan> data = _context.Products.Where(p => p.p_id == id)
+                    .Select(p => new ProductBan
                 {
-                    p_id = id,
                     c_Id = p.c_Id,
+                    p_id = p.p_id,
                     p_title = p.p_title,
                     amount = p.amount,
                     price = p.price,
@@ -84,10 +85,11 @@ namespace E_Commerce.Controllers
             }
             else
             {
-                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
+                IEnumerable<ProductEng> data = _context.Products.Where(p => p.p_id == id)
+                    .Select(p => new ProductEng
                 {
-                    p_id = id,
                     c_Id = p.c_Id,
+                    p_id = p.p_id,
                     p_title = p.p_title_eng,
                     amount = p.amount_eng,
                     price = p.price_eng,

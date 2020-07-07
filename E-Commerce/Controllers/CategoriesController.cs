@@ -65,25 +65,27 @@ namespace E_Commerce.Controllers
             }*/
             if (bangla==1)
             {
-                IEnumerable<ProductBan> data = _context.Products.Select(p => new ProductBan
+                IEnumerable<ProductBan> data = _context.Products.Where(p=>p.c_Id==id)
+                    .Select(p => new ProductBan
                 {
-                    c_Id = id,
                     p_id = p.p_id,
                     p_title = p.p_title,
                     price = p.price,
                     p_imgLink = p.p_imgLink,
                     amount = p.amount,
-                    specification = p.specification
+                    specification = p.specification,
+                    c_Id = p.c_Id
                 });
 
                 return data.ToList();
             }
             else
             {
-                IEnumerable<ProductEng> data = _context.Products.Select(p => new ProductEng
+                IEnumerable<ProductEng> data = _context.Products.Where(p => p.c_Id == id)
+                    .Select(p => new ProductEng
                 {
-                    c_Id = id,
                     p_id = p.p_id,
+                    c_Id = p.c_Id,
                     amount = p.amount_eng,
                     p_title = p.p_title_eng,
                     price = p.price_eng,
