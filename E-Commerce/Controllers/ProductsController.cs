@@ -46,11 +46,11 @@ namespace E_Commerce.Controllers
                 {
                     p_id = p.p_id,
                     c_Id = p.c_Id,
-                    p_title_eng = p.p_title_eng,
-                    amount_eng = p.amount_eng,
-                    price_eng = p.price_eng,
+                    p_title = p.p_title_eng,
+                    amount = p.amount_eng,
+                    price = p.price_eng,
                     p_imgLink = p.p_imgLink,
-                    specification_eng = p.specification_eng
+                    specification = p.specification_eng
                 });
 
                 return data.ToList();
@@ -88,11 +88,11 @@ namespace E_Commerce.Controllers
                 {
                     p_id = id,
                     c_Id = p.c_Id,
-                    p_title_eng = p.p_title_eng,
-                    amount_eng = p.amount_eng,
-                    price_eng = p.price_eng,
+                    p_title = p.p_title_eng,
+                    amount = p.amount_eng,
+                    price = p.price_eng,
                     p_imgLink = p.p_imgLink,
-                    specification_eng = p.specification_eng
+                    specification = p.specification_eng
                 });
 
                 return data.ToList();

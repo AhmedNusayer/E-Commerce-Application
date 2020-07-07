@@ -42,7 +42,7 @@ namespace E_Commerce.Controllers
                 IEnumerable<CategoryEng> data = _context.Categories.Select(p => new CategoryEng
                 {
                     c_id = p.c_id,
-                    c_title_eng = p.c_title_eng,
+                    c_title = p.c_title_eng,
                     c_imgLink = p.c_imgLink
                 });
                  
@@ -84,11 +84,11 @@ namespace E_Commerce.Controllers
                 {
                     c_Id = id,
                     p_id = p.p_id,
-                    amount_eng = p.amount_eng,
-                    p_title_eng = p.p_title_eng,
-                    price_eng = p.price_eng,
+                    amount = p.amount_eng,
+                    p_title = p.p_title_eng,
+                    price = p.price_eng,
                     p_imgLink = p.p_imgLink,
-                    specification_eng = p.specification_eng
+                    specification = p.specification_eng
                 });
 
                 return data.ToList();
