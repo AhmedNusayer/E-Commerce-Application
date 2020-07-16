@@ -50,7 +50,7 @@ namespace E_Commerce.Controllers
             }
         }
 
-        // GET: api/Categories/5
+        // GET: api/5/1
         [HttpGet("{id}/{bangla}")]
         public dynamic GetCategory(int id, int bangla)
         {
