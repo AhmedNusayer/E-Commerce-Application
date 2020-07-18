@@ -27,14 +27,10 @@ namespace E_Commerce.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(s => s.p_title.Contains(searchString) ||
-                             s.p_title_eng.Contains(searchString) ||
-                             s.amount.Contains(searchString) ||
-                             s.amount_eng.Contains(searchString) ||
-                             s.price.Contains(searchString) ||
-                             s.price_eng.Contains(searchString) ||
-                             s.specification.Contains(searchString) ||
-                             s.specification_eng.Contains(searchString));
+                products = products.Where(s => s.p_title.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                             s.p_title_eng.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                             s.specification.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                             s.specification_eng.Contains(searchString, StringComparison.OrdinalIgnoreCase));
             }
 
             if (bangla == 1)

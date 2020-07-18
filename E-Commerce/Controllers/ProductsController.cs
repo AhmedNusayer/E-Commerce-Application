@@ -133,7 +133,6 @@ namespace E_Commerce.Controllers
             return NoContent();
         }
 
-        // POST: api/Products
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -145,7 +144,7 @@ namespace E_Commerce.Controllers
             return CreatedAtAction("GetProduct", new { id = product.p_id }, product);
         }
 
-        // DELETE: api/Products/5
+        // DELETE: Products/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
@@ -164,6 +163,22 @@ namespace E_Commerce.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.p_id == id);
+        }
+
+
+        [HttpPost("{purchase}")]
+        public async Task<ActionResult<PurchaseHistory>> PurchaseProduct(PurchaseHistory purchaseHistory)
+        {
+            _context.purchase_history.Add(purchaseHistory);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProduct", new { id = purchaseHistory.p_id }, purchaseHistory);
+        }
+
+        [HttpGet("{purchase}/{history}/{a}/{b}")]
+        public async Task<ActionResult<IEnumerable<PurchaseHistory>>> GetProducts()
+        {
+            return await _context.purchase_history.ToListAsync();
         }
     }
 }
