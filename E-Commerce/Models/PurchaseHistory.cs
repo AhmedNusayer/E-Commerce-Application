@@ -19,4 +19,9 @@ namespace E_Commerce.Models
         public string date_time { get; set; }
         public Boolean p_status { get; set; }
     }
+
+    public class Purchase : PurchaseHistory
+    {
+        public object purchaseHistories { get; set; }
+    }
 }

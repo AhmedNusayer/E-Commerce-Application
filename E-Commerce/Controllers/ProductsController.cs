@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using E_Commerce.Models;
+using System.Collections.Immutable;
 
 namespace E_Commerce.Controllers
 {
@@ -167,18 +168,44 @@ namespace E_Commerce.Controllers
 
 
         [HttpPost("{purchase}")]
-        public async Task<ActionResult<PurchaseHistory>> PurchaseProduct(PurchaseHistory purchaseHistory)
+        public async Task<ActionResult<IEnumerable<Purchase>>> PurchaseProduct(IEnumerable<Purchase> purchaseHistories)
         {
-            _context.purchase_history.Add(purchaseHistory);
+            foreach(var data in purchaseHistories){
+                PurchaseHistory purchaseHistory = new PurchaseHistory();
+                purchaseHistory.customer_id = data.customer_id;
+                purchaseHistory.c_Id = data.c_Id;
+                purchaseHistory.p_id = data.p_id;
+                purchaseHistory.p_title = data.p_title;
+                purchaseHistory.p_count = data.p_count;
+                purchaseHistory.price = data.price;
+                purchaseHistory.p_status = data.p_status;
+                purchaseHistory.total_price = data.total_price;
+                purchaseHistory.date_time = data.date_time;
+                _context.purchase_history.Add(purchaseHistory);
+            }
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = purchaseHistory.p_id }, purchaseHistory);
+            return Ok();
         }
 
-        [HttpGet("{purchase}/{history}/{a}/{b}")]
-        public async Task<ActionResult<IEnumerable<PurchaseHistory>>> GetProducts()
+        [HttpGet("{purchase}/{history}/{1}")]
+        public async Task<ActionResult<IEnumerable<PurchaseHistory>>> GetPurchaseHistory()
         {
             return await _context.purchase_history.ToListAsync();
+        }
+
+        [HttpDelete("{purchase}/{id}")]
+        public async Task<ActionResult<PurchaseHistory>> DeletePurchaseHistory(int id)
+        {
+            var purchaseHistory = await _context.purchase_history.FindAsync(id);
+            if (purchaseHistory == null)
+            {
+                return NotFound();
+            }
+
+            _context.purchase_history.Remove(purchaseHistory);
+            await _context.SaveChangesAsync();
+
+            return purchaseHistory;
         }
     }
 }
