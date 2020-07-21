@@ -56,7 +56,7 @@ namespace E_Commerce.Controllers
                     c_Id = p.c_Id,
                     amount = p.amount_eng,
                     p_title = p.p_title_eng,
-                    price = p.price_eng,
+                    price = p.price,
                     p_imgLink = p.p_imgLink,
                     specification = p.specification_eng
                 });

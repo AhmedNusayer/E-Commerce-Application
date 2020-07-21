@@ -11,7 +11,7 @@ namespace E_Commerce.Models
         public int c_Id { get; set; }
         public string p_title { get; set; }
         public string amount { get; set; }
-        public string price { get; set; }
+        public int price { get; set; }
         public string p_imgLink { get; set; }
         public string specification { get; set; }
     }

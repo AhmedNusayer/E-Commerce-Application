@@ -14,7 +14,7 @@ namespace E_Commerce.Models
         public string p_title { get; set; }
         public string p_title_eng { get; set; }
         public string amount { get; set; }
-        public string price { get; set; }
+        public int price { get; set; }
         public string p_imgLink { get; set; }
     }
 }

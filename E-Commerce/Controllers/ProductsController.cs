@@ -49,7 +49,6 @@ namespace E_Commerce.Controllers
                     c_Id = p.c_Id,
                     p_title = p.p_title_eng,
                     amount = p.amount_eng,
-                    price = p.price_eng,
                     p_imgLink = p.p_imgLink,
                     specification = p.specification_eng
                 });
@@ -93,7 +92,6 @@ namespace E_Commerce.Controllers
                     p_id = p.p_id,
                     p_title = p.p_title_eng,
                     amount = p.amount_eng,
-                    price = p.price_eng,
                     p_imgLink = p.p_imgLink,
                     specification = p.specification_eng
                 });
