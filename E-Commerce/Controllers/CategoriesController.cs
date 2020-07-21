@@ -51,8 +51,8 @@ namespace E_Commerce.Controllers
         }
 
         // GET: api/5/1
-        [HttpGet("{id}/{bangla}")]
-        public dynamic GetCategory(int id, int bangla)
+        [HttpGet("{id}/{info}")]
+        public dynamic GetCategory(int id)
         {
             //var category = await _context.Categories.FindAsync(id);
             //string query = "SELECT amount FROM products WHERE c_id = {0}";
@@ -63,38 +63,20 @@ namespace E_Commerce.Controllers
             {
                 return NotFound();
             }*/
-            if (bangla==1)
-            {
-                IEnumerable<ProductBan> data = _context.Products.Where(p=>p.c_Id==id)
-                    .Select(p => new ProductBan
-                {
-                    p_id = p.p_id,
-                    p_title = p.p_title,
-                    price = p.price,
-                    p_imgLink = p.p_imgLink,
-                    amount = p.amount,
-                    specification = p.specification,
-                    c_Id = p.c_Id
-                });
+            IEnumerable<ProductInfo> data = _context.Products.Where(p => p.c_Id == id)
+                    .Select(p => new ProductInfo
+                    {
+                        p_id = p.p_id,
+                        p_title = p.p_title,
+                        p_title_eng = p.p_title_eng,
+                        price = p.price,
+                        p_imgLink = p.p_imgLink,
+                        amount = p.amount,
+                        c_Id = p.c_Id
+                    });
 
-                return data.ToList();
-            }
-            else
-            {
-                IEnumerable<ProductEng> data = _context.Products.Where(p => p.c_Id == id)
-                    .Select(p => new ProductEng
-                {
-                    p_id = p.p_id,
-                    c_Id = p.c_Id,
-                    amount = p.amount_eng,
-                    p_title = p.p_title_eng,
-                    price = p.price_eng,
-                    p_imgLink = p.p_imgLink,
-                    specification = p.specification_eng
-                });
+            return data.ToList();
 
-                return data.ToList();
-            }
         }
 
         // PUT: api/Categories/5
