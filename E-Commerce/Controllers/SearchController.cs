@@ -54,7 +54,7 @@ namespace E_Commerce.Controllers
                 {
                     p_id = p.p_id,
                     c_Id = p.c_Id,
-                    amount = p.amount_eng,
+                    amount = p.amount,
                     p_title = p.p_title_eng,
                     price = p.price,
                     p_imgLink = p.p_imgLink,

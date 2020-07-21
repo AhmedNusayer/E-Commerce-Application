@@ -15,7 +15,6 @@ namespace E_Commerce.Models
         public int c_Id { get; set; }
         [Column("p_title_eng")]
         public string p_title { get; set; }
-        [Column ("amount_eng")]
         public string amount { get; set; }
         public int price { get; set; }
         public string p_imgLink { get; set; }
