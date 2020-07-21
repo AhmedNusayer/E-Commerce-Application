@@ -51,7 +51,7 @@ namespace E_Commerce.Controllers
         }
 
         // GET: api/5/1
-        [HttpGet("{id}/{info}")]
+        [HttpGet("{product}/{id}")]
         public dynamic GetCategory(int id)
         {
             //var category = await _context.Categories.FindAsync(id);
