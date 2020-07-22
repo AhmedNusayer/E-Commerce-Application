@@ -15,7 +15,6 @@ namespace E_Commerce.Models
         public string p_title { get; set; }
         public int p_count { get; set; }
         public int price { get; set; }
-        public int total_price { get; set; }
         public string date_time { get; set; }
         public Boolean p_status { get; set; }
     }

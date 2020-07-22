@@ -48,6 +48,7 @@ namespace E_Commerce.Controllers
                     p_id = p.p_id,
                     c_Id = p.c_Id,
                     p_title = p.p_title_eng,
+                    price = p.price,
                     amount = p.amount,
                     p_imgLink = p.p_imgLink,
                     specification = p.specification_eng
@@ -92,6 +93,7 @@ namespace E_Commerce.Controllers
                     p_id = p.p_id,
                     p_title = p.p_title_eng,
                     amount = p.amount,
+                    price = p.price,
                     p_imgLink = p.p_imgLink,
                     specification = p.specification_eng
                 });
@@ -177,7 +179,6 @@ namespace E_Commerce.Controllers
                 purchaseHistory.p_count = data.p_count;
                 purchaseHistory.price = data.price;
                 purchaseHistory.p_status = data.p_status;
-                purchaseHistory.total_price = data.total_price;
                 purchaseHistory.date_time = data.date_time;
                 _context.purchase_history.Add(purchaseHistory);
             }

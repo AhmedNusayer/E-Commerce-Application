@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Models
 {
+    //model for Catagories/purchase/id api
     public class ProductInfo
     {
         [Key]

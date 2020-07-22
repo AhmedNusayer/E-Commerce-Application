@@ -33,37 +33,18 @@ namespace E_Commerce.Controllers
                              s.specification_eng.Contains(searchString, StringComparison.OrdinalIgnoreCase));
             }
 
-            if (bangla == 1)
+            IEnumerable<Product> searchEng = products.Select(p => new Product
             {
-                IEnumerable<ProductBan> searchBan = products.Select(p => new ProductBan
-                {
-                    p_id = p.p_id,
-                    p_title = p.p_title,
-                    price = p.price,
-                    p_imgLink = p.p_imgLink,
-                    amount = p.amount,
-                    specification = p.specification,
-                    c_Id = p.c_Id
-                });
+                p_id = p.p_id,
+                c_Id = p.c_Id,
+                amount = p.amount,
+                p_title = p.p_title,
+                p_title_eng = p.p_title_eng,
+                price = p.price,
+                p_imgLink = p.p_imgLink,
+            });
 
-                return searchBan.ToList();
-            }
-            else
-            {
-                IEnumerable<ProductEng> searchEng = products.Select(p => new ProductEng
-                {
-                    p_id = p.p_id,
-                    c_Id = p.c_Id,
-                    amount = p.amount,
-                    p_title = p.p_title_eng,
-                    price = p.price,
-                    p_imgLink = p.p_imgLink,
-                    specification = p.specification_eng
-                });
-
-                return searchEng.ToList();
-            }
-
+            return searchEng.ToList();
         }
     }
 }
